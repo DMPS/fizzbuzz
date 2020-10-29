@@ -14,6 +14,7 @@ Howdy! Here's a simple Dockerized Fizzbuzz API.
 1. You can test out the API with a simple CURL: `curl -i localhost:<PORT>/?value=15`
 1. You should get a result like below:
 
+
 ```json
 {
     "result":"fizzbuzz"
