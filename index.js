@@ -1,23 +1,30 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 const PORT = process.env.PORT || 3000
 const HOST = '0.0.0.0';
 
-app.get('/', function (req, res) {
-    const {value} = req.query;
+const jsonParser = bodyParser.json()
+
+app.post('/fizzbuzz', jsonParser, function (req, res) {
+    const {count} = req.body;
+
+    if (typeof count !=="number") {
+        res.send({error:`Invalid response ${count}`,response:""})
+    }else{
+        let response = ""
+
+        if(count%3==0) response+="fizz"
+        if(count%5==0) response+="buzz"
     
-    let result = ""
-
-    if(value%3==0) result+="fizz"
-    if(value%5==0) result+="buzz"
-
-    result = result == "" ? value : result
-
-    res.send({result})
-
-    console.log(`Recieved ${value}, returned ${result}`)
+        response = response == "" ? count : response
+    
+        res.send({response,error:""})
+    
+        console.log(`Recieved ${count}, returned ${response}`)
+    }
   })
 
-app.listen(port,HOST, () => {
-  console.log(`Fizzbuzz listening at http://localhost:${port}`)
+app.listen(PORT,HOST, () => {
+  console.log(`Fizzbuzz listening at http://localhost:${PORT}`)
 })
