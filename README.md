@@ -11,13 +11,23 @@ Howdy! Here's a simple Dockerized Fizzbuzz API.
 
 1. Build the docker image locally: `docker build -t <your username>/fizzbuzz .`
 1. Run the docker container locally: `docker run -p <PORT>:8080 -d <your username>/fizzbuzz`
-1. You can test out the API with a simple CURL: `curl -i localhost:<PORT>/?value=15`
-1. You should get a result like below: 
+1. You can test out the API with a simple CURL: 
 
+```bash
+    curl -X POST \
+    http://localhost:<PORT>/fizzbuzz \
+    -H 'Content-Type: application/json' \
+    -H 'Postman-Token: 5d1cedeb-f897-497b-86af-ee7527e04b90' \
+    -H 'cache-control: no-cache' \
+    -d '{"count":15}'
+```
+
+1. You should get a result like below:
 
 ```json
 {
-    "result":"fizzbuzz"
+    "response": "fizzbuzz",
+    "error": ""
 }
 ```
 
