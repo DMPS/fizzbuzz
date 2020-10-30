@@ -33,4 +33,4 @@ Howdy! Here's a simple Dockerized Fizzbuzz API.
 
 ### Publicly Available
 
-There's also a version of the API running on Google Cloud Run: 
+There's also a version of the API running on Google Cloud Run: https://fizzbuzz-wztc7suijq-ew.a.run.app/fizzbuzz
