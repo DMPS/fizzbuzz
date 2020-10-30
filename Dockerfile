@@ -1,22 +1,19 @@
-FROM alpine:3.5
+FROM node:10-alpine
 
 ENV PORT="8080"
-# install node
-RUN apk add –no-cache nodejs tini
-# set working directory
-WORKDIR /root/chat
-# copy project file
-COPY package.json .
-# install node packages
-RUN npm set progress=false && \
-    npm config set depth 0 && \
-    npm install --only=production && \
-    npm cache clean
-# copy app files
-COPY . .
-# Set tini as entrypoint
-ENTRYPOINT [“/sbin/tini”, “--”]
-# application server port
+
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
+USER node
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
 EXPOSE 8080
-# default run command
-CMD npm run start
+
+CMD [ "node", "src/index.js" ]
