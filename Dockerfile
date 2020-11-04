@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:10-alpine as BASE
 
 ENV PORT="8080"
 
@@ -14,6 +14,8 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
+FROM BASE as PROD
+
 EXPOSE 8080
 
-CMD [ "node", "src/index.js" ]
+CMD ["node", "src/index.js"]
